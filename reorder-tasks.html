@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <meta name="description" content="A client has a web page with a series of tasks. They want to implement a reordering feature that behaves like the following example:
+    After performing the clicks shown in the animation above, the document's body should be:">
+</head>
+<body>
+
+    <container>
+        <div id="r-top-buttons">
+            <span>Read emails</span>
+            <button class="downButton" type="button">&darr;</button>
+        </div>
+        <div id="r-center-buttons">
+            <span>Prepare presentation</span>
+            <button class="downButton" type="button">&darr;</button>
+            <button class="upButton" type="button">&uarr;</button></div>
+        <div id="r-botton-buttons">
+            <span>Monthly report</span>
+            <button class="upButton" type="button">&uarr;</button>
+        </div>
+    </container>
+
+</body>
+<script type="text/javascript">
+    // Taken from internet -- This function
+    function recognizeMouseInsideOfDiv () {
+        var div1 = document.getElementById("r-top-buttons"); // r-top-buttons sample
+        var div2 = document.getElementById("r-center-buttons"); // r-top-buttons sample
+        var div3 = document.getElementById("r-bottom-buttons"); // r-top-buttons sample
+        div1.addEventListener("mousemove", function(event) {
+            var x = event.offsetX;
+            var y = event.offsetY;
+            return "up"
+        });
+        div1.addEventListener("mousemove", function(event) {
+            var x = event.offsetX;
+            var y = event.offsetY;
+            return "center"
+        });
+        div1.addEventListener("mousemove", function(event) {
+            var x = event.offsetX;
+            var y = event.offsetY;
+            return "down"
+        });
+    }
+
+
+    window.onload = function initialize() {
+        var containerBody = document.getElementsByTagName("container");
+        var container = document.querySelector("container");
+
+        // General function
+        
+        function reorderList (targettingButton) {
+            if(targettingButton.parentElement.classList.id === "r-top-buttons") {
+                container.innerHTML = `
+                    <div id="r-top-buttons">
+                        <span>Prepare presentation</span>
+                        <button class="downButton" type="button">&darr;</button>
+                    </div>
+                    <div id="r-center-buttons">
+                        <span>Read emails</span>
+                        <button class="downButton" type="button">&darr;</button>
+                        <button class="upButton" type="button">&uarr;</button>
+                    </div>
+                    <div id="r-botton-buttons">
+                        <span>Monthly report</span>
+                        <button class="upButton" type="button">&uarr;</button>
+                    </div>
+                `;
+            } else if(targettingButton.parentElement.classList.id === "r-center-buttons") {
+                container.innerHTML = `
+                    <div id="r-center-buttons">
+                        <span>Prepare presentation</span>
+                        <button class="downButton" type="button">&darr;</button>
+                    </div>
+                    
+                    <div id="r-top-buttons">
+                        <span>Monthly report</span>
+                        <button class="upButton" type="button">&uarr;</button>
+                        <button class="downButton" type="button">&darr;</button>
+                    </div>
+                    <div id="r-botton-buttons">
+                        <span>Read emails</span>
+                        <button class="upButton" type="button">&uarr;</button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div id="r-center-buttons">
+                        <span>Prepare presentation</span>
+                        <button class="downButton" type="button">&darr;</button>
+                    </div>
+                    
+                    <div id="r-top-buttons">
+                        <span>Monthly report</span>
+                        <button class="upButton" type="button">&uarr;</button>
+                        <button class="downButton" type="button">&darr;</button>
+                    </div>
+                    <div id="r-botton-buttons">
+                        <span>Read emails</span>
+                        <button class="upButton" type="button">&uarr;</button>
+                    </div>
+                `;
+            }
+        }
+
+        container.querySelectorAll("button")[0].addEventListener("click", function () { 
+            reorderList(this)
+        });
+        container.querySelectorAll("button")[3].addEventListener("click", function () { 
+            reorderList(this)
+        });
+        container.querySelectorAll("button")[1].addEventListener("click", function () { 
+            reorderList(this)
+        });
+    }
+
+
+    
+    
+    
+    initialize(); 
+    
+          
+</script>
+</html>
